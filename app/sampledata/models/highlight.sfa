@@ -1,0 +1,70 @@
+
+{
+  animations: [
+    {
+      path: 'sampledata/models/highlight.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: 'Material_66',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: '2150',
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/models/highlight.fbx',
+    name: 'highlight',
+    recenter: 'root',
+    scale: 3.7009620000000001,
+  },
+  samplers: [
+    {
+      file: 'sampledata/models\\highlight.fbm\\2150.png',
+      name: '2150',
+      pipeline_name: 'highlight.fbm\\2150.png',
+    },
+  ],
+  version: '0.54:2',
+}
