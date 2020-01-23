@@ -15,7 +15,11 @@
  */
 package com.google.ar.sceneform.samples.hellosceneform;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.TimeAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
@@ -23,10 +27,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.Toast;
 import com.google.ar.core.Anchor;
@@ -46,8 +53,10 @@ import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.core.Config;
 import com.google.ar.sceneform.ux.TransformableNode;
 
+import java.sql.Time;
 import java.util.Random;
 import java.util.Timer;
+import java.util.*;
 import java.util.TimerTask;
 
 /**
@@ -59,6 +68,7 @@ public class HelloSceneformActivity extends AppCompatActivity {
 
   private ArFragment arFragment;
   private ModelRenderable andyRenderable;
+  ArrayList<ModelRenderable> spaceRenderable = new ArrayList<ModelRenderable>();
   private  ModelRenderable highlight;
   private ObjectAnimator objectAnimation;
 
@@ -66,6 +76,7 @@ public class HelloSceneformActivity extends AppCompatActivity {
     private AnchorNode prevAnchorNode;
     private AnchorNode endNode;
     private Node andy;
+    private Node st,en;
 
   @Override
   @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
@@ -84,6 +95,13 @@ public class HelloSceneformActivity extends AppCompatActivity {
     // When you build a Renderable, Sceneform loads its resources in the background while returning
     // a CompletableFuture. Call thenAccept(), handle(), or check isDone() before calling get().
       //For Arrow
+      String arg[] = {"Astronaut.sfb",
+      "jupiter.sfb",
+      "mars.sfb",
+              "mercury.sfb","neptune.sfb","pluto.sfb","saturn.sfb","Spacestation.sfb","ufo.sfb","uranus.sfb","venus.sfb","Earth.sfb"
+      };
+      for(int i=0;i<12;i++)
+      modelRender(arg[i],i);
     ModelRenderable.builder()
         .setSource(this, R.raw.andy)
         .build()
@@ -132,8 +150,8 @@ public class HelloSceneformActivity extends AppCompatActivity {
 
             start.setParent(end);
             start.setLocalPosition(new Vector3(0f,0f,-1f));
-            Node st = start;
-            Node en = end;
+             st = start;
+             en = end;
 
             Vector3 point1, point2;
             point1 = start.getWorldPosition();
@@ -164,14 +182,55 @@ public class HelloSceneformActivity extends AppCompatActivity {
                                 node.setWorldRotation(rotationFromAToB);
                             }
         );
-           planetsMove(st,en);
 
+            Node te = new Node();
+            te.setParent(end);
+            te.setLocalPosition(new Vector3(0f,0f,-1f));
+            AnimatorSet s = new AnimatorSet();
+            s.play(planetsMove(st));
+            s.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    //endNode.setParent(null);
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    s.play(planetsMove(te));
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+            s.start();
+            //s.play(planetsMove()).after(20000);
+           // allPlanetsMove();
+            //planetsMove(st).start();
         });
   }
 
-  private void planetsMove(Node start,Node end){
+  private void allPlanetsMove(){
+      Node t = new Node();
+      for(int i=0;i<2;i++) {
+          float tem = i-1;
+          t.setParent(en);
+          t.setLocalPosition(new Vector3(0f,0f,tem));
+          planetsMove(t).start();
+      }
+  }
+
+  private ObjectAnimator planetsMove(Node start){
+
 
       Node temp = start;
+
       Node st1 = new Node();
       Node st2 = new Node();
       Node st3 = new Node();
@@ -180,34 +239,30 @@ public class HelloSceneformActivity extends AppCompatActivity {
       st2.setParent(temp);
       st3.setParent(temp);
 
+      temp.setLocalScale(new Vector3(0.5f,0.5f,0.5f));
+
       Random rand = new Random();
-      int r = rand.nextInt(1000);
+      int r = rand.nextInt(3);
 
 
-      st1.setLocalPosition(new Vector3(0.3f,0f,0f));
+      st1.setLocalPosition(new Vector3(1f,0f,0f));
       st2.setLocalPosition(new Vector3(0f,0f,0f));
-      st3.setLocalPosition(new Vector3(-0.3f,0f,0f));
+      st3.setLocalPosition(new Vector3(-1f,0f,0f));
 
       if(r%3!=0)
-          st1.setRenderable(andyRenderable);
+          st1.setRenderable(randomObj());
       if(r%3!=1)
-          st2.setRenderable(andyRenderable);
+          st2.setRenderable(randomObj());
       if(r%3!=2)
-          st3.setRenderable(andyRenderable);
+          st3.setRenderable(randomObj());
 
 
-     startWalking(temp,end);
-     planetsMove(start,end);
-  }
-
-    private void startWalking(Node node,Node end) {
         objectAnimation = new ObjectAnimator();
-        objectAnimation.setAutoCancel(true);
-        objectAnimation.setTarget(node);
+        objectAnimation.setTarget(temp);
 
         // All the positions should be world positions
         // The first position is the start, and the second is the end.
-        objectAnimation.setObjectValues(node.getWorldPosition(), end.getWorldPosition());
+        objectAnimation.setObjectValues(temp.getWorldPosition(), en.getWorldPosition());
 
         // Use setWorldPosition to position andy.
         objectAnimation.setPropertyName("worldPosition");
@@ -218,9 +273,35 @@ public class HelloSceneformActivity extends AppCompatActivity {
         // This makes the animation linear (smooth and uniform).
         objectAnimation.setInterpolator(new LinearInterpolator());
         // Duration in ms of the animation.
-        objectAnimation.setDuration(2000);
-        objectAnimation.start();
+        objectAnimation.setDuration(2*1000);
+        //objectAnimation.setRepeatCount(Animation.INFINITE);
+
+        return objectAnimation;
     }
+
+
+    private ModelRenderable randomObj(){
+        Random rand = new Random();
+        int r = rand.nextInt(1000);
+        //return andyRenderable;
+        return spaceRenderable.get(r%spaceRenderable.size());
+    }
+
+    private void modelRender(String arg,int i){
+          ModelRenderable.builder()
+                  .setSource(this, Uri.parse(arg))
+                  .build()
+                  .thenAccept(renderable -> spaceRenderable.add(renderable))
+                  .exceptionally(
+                          throwable -> {
+                              Toast toast =
+                                      Toast.makeText(this, "Unable to load " + arg, Toast.LENGTH_LONG);
+                              toast.setGravity(Gravity.CENTER, 0, 0);
+                              toast.show();
+                              return null;
+                          });
+      }
+
 
   /**
    * Returns false and displays an error message if Sceneform can not run, true if Sceneform can run

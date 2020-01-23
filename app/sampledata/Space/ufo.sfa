@@ -1,0 +1,74 @@
+{
+  animations: [
+    {
+      path: 'sampledata/Space/ufo.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: 'Material_177',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: '41',
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/Space/ufo.fbx',
+    name: 'ufo',
+    recenter: 'root',
+    scale: 97.656240000000007,
+  },
+  samplers: [
+    {
+      file: 'sampledata/Space\\ufo.fbm\\41.png',
+      name: '41',
+      pipeline_name: 'ufo.fbm\\41.png',
+    },
+    {
+      file: 'sampledata/Space\\ufo.fbm\\43.png',
+      name: '43',
+      pipeline_name: 'ufo.fbm\\43.png',
+    },
+  ],
+  version: '0.54:2',
+}

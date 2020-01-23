@@ -1,0 +1,74 @@
+{
+  animations: [
+    {
+      path: 'sampledata/Space/mercury.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: 'Material_103',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: '17',
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/Space/mercury.fbx',
+    name: 'mercury',
+    recenter: 'root',
+    scale: 97.65625,
+  },
+  samplers: [
+    {
+      file: 'sampledata/Space\\mercury.fbm\\17.png',
+      name: '17',
+      pipeline_name: 'mercury.fbm\\17.png',
+    },
+    {
+      file: 'sampledata/Space\\mercury.fbm\\19.png',
+      name: '19',
+      pipeline_name: 'mercury.fbm\\19.png',
+    },
+  ],
+  version: '0.54:2',
+}

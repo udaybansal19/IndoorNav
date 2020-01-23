@@ -1,0 +1,122 @@
+{
+  animations: [
+    {
+      path: 'sampledata/Space/Spacestation.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: 'Material_146',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: '25',
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+    {
+      name: 'Material_147',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: '29',
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/Space/Spacestation.fbx',
+    name: 'Spacestation',
+    recenter: 'root',
+    scale: 111.43330000000001,
+  },
+  samplers: [
+    {
+      file: 'sampledata/Space\\Spacestation.fbm\\25.png',
+      name: '25',
+      pipeline_name: 'Spacestation.fbm\\25.png',
+    },
+    {
+      file: 'sampledata/Space\\Spacestation.fbm\\27.png',
+      name: '27',
+      pipeline_name: 'Spacestation.fbm\\27.png',
+    },
+    {
+      file: 'sampledata/Space\\Spacestation.fbm\\29.png',
+      name: '29',
+      pipeline_name: 'Spacestation.fbm\\29.png',
+    },
+    {
+      file: 'sampledata/Space\\Spacestation.fbm\\31.png',
+      name: '31',
+      pipeline_name: 'Spacestation.fbm\\31.png',
+    },
+  ],
+  version: '0.54:2',
+}

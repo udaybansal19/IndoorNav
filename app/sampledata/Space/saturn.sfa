@@ -1,0 +1,117 @@
+{
+  animations: [
+    {
+      path: 'sampledata/Space/saturn.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: 'Material_69',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: '10',
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+    {
+      name: 'Material_70',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: '11',
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/Space/saturn.fbx',
+    name: 'saturn',
+    recenter: 'root',
+    scale: 97.656240000000007,
+  },
+  samplers: [
+    {
+      file: 'sampledata/Space\\saturn.fbm\\10.png',
+      name: '10',
+      pipeline_name: 'saturn.fbm\\10.png',
+    },
+    {
+      file: 'sampledata/Space\\saturn.fbm\\11.png',
+      name: '11',
+      pipeline_name: 'saturn.fbm\\11.png',
+    },
+    {
+      file: 'sampledata/Space\\saturn.fbm\\12.png',
+      name: '12',
+      pipeline_name: 'saturn.fbm\\12.png',
+    },
+  ],
+  version: '0.54:2',
+}

@@ -1,0 +1,74 @@
+{
+  animations: [
+    {
+      path: 'sampledata/models/Earth.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: 'Material_49',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: '5',
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/models/Earth.fbx',
+    name: 'Earth',
+    recenter: 'root',
+    scale: 97.65625,
+  },
+  samplers: [
+    {
+      file: 'sampledata/models\\Earth.fbm\\5.png',
+      name: '5',
+      pipeline_name: 'Earth.fbm\\5.png',
+    },
+    {
+      file: 'sampledata/models\\Earth.fbm\\7.png',
+      name: '7',
+      pipeline_name: 'Earth.fbm\\7.png',
+    },
+  ],
+  version: '0.54:2',
+}

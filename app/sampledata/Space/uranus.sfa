@@ -1,0 +1,112 @@
+{
+  animations: [
+    {
+      path: 'sampledata/Space/uranus.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: 'Material_132',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: '23',
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+    {
+      name: 'Material_133',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: '24',
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/Space/uranus.fbx',
+    name: 'uranus',
+    recenter: 'root',
+    scale: 97.656240000000007,
+  },
+  samplers: [
+    {
+      file: 'sampledata/Space\\uranus.fbm\\23.png',
+      name: '23',
+      pipeline_name: 'uranus.fbm\\23.png',
+    },
+    {
+      file: 'sampledata/Space\\uranus.fbm\\24.png',
+      name: '24',
+      pipeline_name: 'uranus.fbm\\24.png',
+    },
+  ],
+  version: '0.54:2',
+}

@@ -1,0 +1,122 @@
+{
+  animations: [
+    {
+      path: 'sampledata/Space/Astronaut.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: 'Material_162',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: '33',
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+    {
+      name: 'Material_163',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: '37',
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/Space/Astronaut.fbx',
+    name: 'Astronaut',
+    recenter: 'root',
+    scale: 107.97862,
+  },
+  samplers: [
+    {
+      file: 'sampledata/Space\\Astronaut.fbm\\33.png',
+      name: '33',
+      pipeline_name: 'Astronaut.fbm\\33.png',
+    },
+    {
+      file: 'sampledata/Space\\Astronaut.fbm\\35.png',
+      name: '35',
+      pipeline_name: 'Astronaut.fbm\\35.png',
+    },
+    {
+      file: 'sampledata/Space\\Astronaut.fbm\\37.png',
+      name: '37',
+      pipeline_name: 'Astronaut.fbm\\37.png',
+    },
+    {
+      file: 'sampledata/Space\\Astronaut.fbm\\39.png',
+      name: '39',
+      pipeline_name: 'Astronaut.fbm\\39.png',
+    },
+  ],
+  version: '0.54:2',
+}
