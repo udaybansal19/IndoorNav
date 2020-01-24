@@ -115,25 +115,24 @@ public class HelloSceneformActivity extends AppCompatActivity {
               toast.show();
               return null;
             });
-//      ModelRenderable.builder()
-//              .setSource(this, Uri.parse("highlight.sfb"))
-//              .build()
-//              .thenAccept(renderable -> highlight = renderable)
-//              .exceptionally(
-//                      throwable -> {
-//                          Toast toast =
-//                                  Toast.makeText(this, "Unable to load highlight renderable", Toast.LENGTH_LONG);
-//                          toast.setGravity(Gravity.CENTER, 0, 0);
-//                          toast.show();
-//                          return null;
-//                      });
+      ModelRenderable.builder()
+              .setSource(this, R.raw.andy)
+              .build()
+              .thenAccept(renderable -> andyRenderable = renderable)
+              .exceptionally(
+                      throwable -> {
+                          Toast toast =
+                                  Toast.makeText(this, "Unable to load andy renderable", Toast.LENGTH_LONG);
+                          toast.setGravity(Gravity.CENTER, 0, 0);
+                          toast.show();
+                          return null;
+                      });
 
     arFragment.setOnTapArPlaneListener(
         (HitResult hitResult, Plane plane, MotionEvent motionEvent) -> {
           if (andyRenderable == null) {
             return;
           }
-
           // Create the Anchor.
           Anchor anchor = hitResult.createAnchor();
                 endNode = new AnchorNode(anchor);
@@ -183,6 +182,7 @@ public class HelloSceneformActivity extends AppCompatActivity {
                                 node.setWorldRotation(rotationFromAToB);
                             }
         );
+            arFragment.getArSceneView().getSession().getConfig().setPlaneFindingMode(Config.PlaneFindingMode.DISABLED);
             allPlanetsMove();
         });
   }
@@ -235,16 +235,30 @@ public class HelloSceneformActivity extends AppCompatActivity {
       int r = rand.nextInt(3);
 
 
-      st1.setLocalPosition(new Vector3(1f,0f,0f));
+      st1.setLocalPosition(new Vector3(0.6f,0f,0f));
       st2.setLocalPosition(new Vector3(0f,0f,0f));
-      st3.setLocalPosition(new Vector3(-1f,0f,0f));
+      st3.setLocalPosition(new Vector3(-0.6f,0f,0f));
 
-      if(r%3!=0)
-          st1.setRenderable(randomObj());
-      if(r%3!=1)
-          st2.setRenderable(randomObj());
-      if(r%3!=2)
-          st3.setRenderable(randomObj());
+      ModelRenderable m1 = randomObj();
+      ModelRenderable m2 = randomObj();
+      while(m1==m2)
+          m2 = randomObj();
+
+          if (r % 3 != 0)
+          {
+              st1.setRenderable(m1);
+              m1=m2;
+          }
+          if (r % 3 != 1)
+          {
+              st2.setRenderable(m1);
+              if(r==0)
+                  m1=m2;
+          }
+          if (r % 3 != 2)
+              st3.setRenderable(m1);
+
+
       return temp;
   }
 
