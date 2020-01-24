@@ -76,7 +76,7 @@ public class HelloSceneformActivity extends AppCompatActivity {
     private AnchorNode prevAnchorNode;
     private AnchorNode endNode;
     private Node andy;
-    private Node st,en;
+    private Node st,en,temp,temp2;
 
   @Override
   @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
@@ -165,13 +165,13 @@ public class HelloSceneformActivity extends AppCompatActivity {
             final Vector3 directionFromTopToBottom = difference.normalized();
             final Quaternion rotationFromAToB =
                     Quaternion.lookRotation(directionFromTopToBottom, Vector3.up());
-            MaterialFactory.makeOpaqueWithColor(getApplicationContext(), new Color(0, 255, 244,0.01f))
+            MaterialFactory.makeOpaqueWithColor(getApplicationContext(), new Color(0, 0, 0,0.01f))
                     .thenAccept(
                             material -> {
                             /* Then, create a rectangular prism, using ShapeFactory.makeCube() and use the difference vector
                                    to extend to the necessary length.  */
                                 ModelRenderable model = ShapeFactory.makeCube(
-                                        new Vector3(.7f, .01f, difference.length()),
+                                        new Vector3(1f, 0f, difference.length()),
                                         Vector3.zero(), material);
                             /* Last, set the world rotation of the node to the rotation calculated earlier and set the world position to
                                    the midpoint between the given points . */
@@ -182,54 +182,43 @@ public class HelloSceneformActivity extends AppCompatActivity {
                                 node.setWorldRotation(rotationFromAToB);
                             }
         );
-
-            Node te = new Node();
-            te.setParent(end);
-            te.setLocalPosition(new Vector3(0f,0f,-1f));
-            AnimatorSet s = new AnimatorSet();
-            s.play(planetsMove(st));
-            s.addListener(new Animator.AnimatorListener() {
-                @Override
-                public void onAnimationStart(Animator animation) {
-                    //endNode.setParent(null);
-                }
-
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    s.play(planetsMove(te));
-                }
-
-                @Override
-                public void onAnimationCancel(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationRepeat(Animator animation) {
-
-                }
-            });
-            s.start();
-            //s.play(planetsMove()).after(20000);
-           // allPlanetsMove();
-            //planetsMove(st).start();
+            allPlanetsMove();
         });
   }
 
   private void allPlanetsMove(){
-      Node t = new Node();
-      for(int i=0;i<2;i++) {
-          float tem = i-1;
-          t.setParent(en);
-          t.setLocalPosition(new Vector3(0f,0f,tem));
-          planetsMove(t).start();
-      }
+      AnimatorSet s = new AnimatorSet();
+      s.play(planetsMove());
+      s.addListener(new Animator.AnimatorListener() {
+          @Override
+          public void onAnimationStart(Animator animation) {
+              //endNode.setParent(null);
+          }
+
+          @Override
+          public void onAnimationEnd(Animator animation) {
+              temp.setParent(null);
+              allPlanetsMove();
+
+          }
+
+          @Override
+          public void onAnimationCancel(Animator animation) {
+
+          }
+
+          @Override
+          public void onAnimationRepeat(Animator animation) {
+          }
+      });
+      s.start();
   }
 
-  private ObjectAnimator planetsMove(Node start){
-
-
-      Node temp = start;
+  private Node planetsSet(){
+      Node start = new Node();
+      start.setParent(en);
+      start.setLocalPosition(new Vector3(0f,0f,-1f));
+      temp = start;
 
       Node st1 = new Node();
       Node st2 = new Node();
@@ -255,35 +244,38 @@ public class HelloSceneformActivity extends AppCompatActivity {
           st2.setRenderable(randomObj());
       if(r%3!=2)
           st3.setRenderable(randomObj());
+      return temp;
+  }
 
+  private ObjectAnimator planetsMove(){
 
-        objectAnimation = new ObjectAnimator();
-        objectAnimation.setTarget(temp);
+      // planetsAnimation(temp);
 
-        // All the positions should be world positions
-        // The first position is the start, and the second is the end.
-        objectAnimation.setObjectValues(temp.getWorldPosition(), en.getWorldPosition());
+      objectAnimation = new ObjectAnimator();
+      objectAnimation.setTarget(planetsSet());
 
-        // Use setWorldPosition to position andy.
-        objectAnimation.setPropertyName("worldPosition");
+      // All the positions should be world positions
+      // The first position is the start, and the second is the end.
+      objectAnimation.setObjectValues(temp.getWorldPosition(), en.getWorldPosition());
 
-        // The Vector3Evaluator is used to evaluator 2 vector3 and return the next
-        // vector3.  The default is to use lerp.
-        objectAnimation.setEvaluator(new Vector3Evaluator());
-        // This makes the animation linear (smooth and uniform).
-        objectAnimation.setInterpolator(new LinearInterpolator());
-        // Duration in ms of the animation.
-        objectAnimation.setDuration(2*1000);
-        //objectAnimation.setRepeatCount(Animation.INFINITE);
+      // Use setWorldPosition to position andy.
+      objectAnimation.setPropertyName("worldPosition");
 
-        return objectAnimation;
+      // The Vector3Evaluator is used to evaluator 2 vector3 and return the next
+      // vector3.  The default is to use lerp.
+      objectAnimation.setEvaluator(new Vector3Evaluator());
+      // This makes the animation linear (smooth and uniform).
+      objectAnimation.setInterpolator(new LinearInterpolator());
+      // Duration in ms of the animation.
+      objectAnimation.setDuration(1500);
+      //objectAnimation.setRepeatCount(Animation.INFINITE);
+
+      return objectAnimation;
     }
-
 
     private ModelRenderable randomObj(){
         Random rand = new Random();
         int r = rand.nextInt(1000);
-        //return andyRenderable;
         return spaceRenderable.get(r%spaceRenderable.size());
     }
 
