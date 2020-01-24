@@ -132,3 +132,8 @@ sceneform.asset('sampledata/Space/venus.fbx',
         'default',
         'sampledata/Space/venus.sfa',
         'src/main/assets/venus')
+
+sceneform.asset('sampledata/Space/spaceship.fbx',
+        'default',
+        'sampledata/Space/spaceship.sfa',
+        'src/main/assets/spaceship')

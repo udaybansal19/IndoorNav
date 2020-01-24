@@ -68,6 +68,7 @@ public class HelloSceneformActivity extends AppCompatActivity {
 
   private ArFragment arFragment;
   private ModelRenderable andyRenderable;
+  private ModelRenderable userRenderable;
   ArrayList<ModelRenderable> spaceRenderable = new ArrayList<ModelRenderable>();
   private  ModelRenderable highlight;
   private ObjectAnimator objectAnimation;
@@ -103,13 +104,13 @@ public class HelloSceneformActivity extends AppCompatActivity {
       for(int i=0;i<12;i++)
       modelRender(arg[i],i);
     ModelRenderable.builder()
-        .setSource(this, R.raw.andy)
+        .setSource(this, Uri.parse("spaceship.ufb"))
         .build()
-        .thenAccept(renderable -> andyRenderable = renderable)
+        .thenAccept(renderable -> userRenderable = renderable)
         .exceptionally(
             throwable -> {
               Toast toast =
-                  Toast.makeText(this, "Unable to load andy renderable", Toast.LENGTH_LONG);
+                  Toast.makeText(this, "Unable to load userRenderable", Toast.LENGTH_LONG);
               toast.setGravity(Gravity.CENTER, 0, 0);
               toast.show();
               return null;
