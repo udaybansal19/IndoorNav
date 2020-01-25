@@ -73,7 +73,7 @@ public class HelloSceneformActivity extends AppCompatActivity {
   private  ModelRenderable highlight;
   private ObjectAnimator objectAnimation;
 
-    int c=0;
+    private int oneTimeFlag = 0;
     private AnchorNode prevAnchorNode;
     private AnchorNode endNode;
     private Node andy;
@@ -128,63 +128,67 @@ public class HelloSceneformActivity extends AppCompatActivity {
                           return null;
                       });
 
-    arFragment.setOnTapArPlaneListener(
-        (HitResult hitResult, Plane plane, MotionEvent motionEvent) -> {
-          if (andyRenderable == null) {
-            return;
-          }
-          // Create the Anchor.
-          Anchor anchor = hitResult.createAnchor();
-                endNode = new AnchorNode(anchor);
-                endNode.setParent(arFragment.getArSceneView().getScene());
 
-                // Create the transformable andy and add it to the anchor.
+
+          arFragment.setOnTapArPlaneListener(
+                  (HitResult hitResult, Plane plane, MotionEvent motionEvent) -> {
+                      if (andyRenderable == null || oneTimeFlag!=0) {
+                          return;
+                      }
+                      oneTimeFlag++;
+                      // Create the Anchor.
+                      Anchor anchor = hitResult.createAnchor();
+                      endNode = new AnchorNode(anchor);
+                      endNode.setParent(arFragment.getArSceneView().getScene());
+
+                      // Create the transformable andy and add it to the anchor.
 //                andy = new Node();
 //                andy.setParent(startNode);
 //                andy.setRenderable(andyRenderable);
-                // Create the end position and start the animation.
-            Vector3 pos = new Vector3(1f,5f,10f);
-            Node start = new Node();
-            Node end = new Node();
-            endNode.addChild(end);
+                      // Create the end position and start the animation.
+                      Vector3 pos = new Vector3(1f, 5f, 10f);
+                      Node start = new Node();
+                      Node end = new Node();
+                      endNode.addChild(end);
 
-            start.setParent(end);
-            start.setLocalPosition(new Vector3(0f,0f,-1f));
-             st = start;
-             en = end;
+                      start.setParent(end);
+                      start.setLocalPosition(new Vector3(0f, 0f, -1f));
+                      st = start;
+                      en = end;
 
-            Vector3 point1, point2;
-            point1 = start.getWorldPosition();
-            point2 = end.getWorldPosition();
+                      Vector3 point1, point2;
+                      point1 = start.getWorldPosition();
+                      point2 = end.getWorldPosition();
 
     /*
         First, find the vector extending between the two points and define a look rotation
         in terms of this Vector.
     */
-            final Vector3 difference = Vector3.subtract(point1, point2);
-            final Vector3 directionFromTopToBottom = difference.normalized();
-            final Quaternion rotationFromAToB =
-                    Quaternion.lookRotation(directionFromTopToBottom, Vector3.up());
-            MaterialFactory.makeOpaqueWithColor(getApplicationContext(), new Color(0, 0, 0,0.01f))
-                    .thenAccept(
-                            material -> {
+                      final Vector3 difference = Vector3.subtract(point1, point2);
+                      final Vector3 directionFromTopToBottom = difference.normalized();
+                      final Quaternion rotationFromAToB =
+                              Quaternion.lookRotation(directionFromTopToBottom, Vector3.up());
+                      MaterialFactory.makeOpaqueWithColor(getApplicationContext(), new Color(0, 0, 0, 0.01f))
+                              .thenAccept(
+                                      material -> {
                             /* Then, create a rectangular prism, using ShapeFactory.makeCube() and use the difference vector
                                    to extend to the necessary length.  */
-                                ModelRenderable model = ShapeFactory.makeCube(
-                                        new Vector3(1f, 0f, difference.length()),
-                                        Vector3.zero(), material);
+                                          ModelRenderable model = ShapeFactory.makeCube(
+                                                  new Vector3(1f, 0f, difference.length()),
+                                                  Vector3.zero(), material);
                             /* Last, set the world rotation of the node to the rotation calculated earlier and set the world position to
                                    the midpoint between the given points . */
-                                Node node = new Node();
-                                node.setParent(endNode);
-                                node.setRenderable(model);
-                                node.setWorldPosition(Vector3.add(point1, point2).scaled(.5f));
-                                node.setWorldRotation(rotationFromAToB);
-                            }
-        );
-            arFragment.getArSceneView().getSession().getConfig().setPlaneFindingMode(Config.PlaneFindingMode.DISABLED);
-            allPlanetsMove();
-        });
+                                          Node node = new Node();
+                                          node.setParent(endNode);
+                                          node.setRenderable(model);
+                                          node.setWorldPosition(Vector3.add(point1, point2).scaled(.5f));
+                                          node.setWorldRotation(rotationFromAToB);
+                                      }
+                              );
+                      arFragment.getArSceneView().getSession().getConfig().setPlaneFindingMode(Config.PlaneFindingMode.DISABLED);
+                      allPlanetsMove();
+                  });
+
   }
 
   private void allPlanetsMove(){
