@@ -68,7 +68,7 @@ public class HelloSceneformActivity extends AppCompatActivity {
 
   private ArFragment arFragment;
   private ModelRenderable andyRenderable;
-  private ModelRenderable userRenderable;
+  private ModelRenderable playerRenderable;
   ArrayList<ModelRenderable> spaceRenderable = new ArrayList<ModelRenderable>();
   private  ModelRenderable highlight;
   private ObjectAnimator objectAnimation;
@@ -76,6 +76,7 @@ public class HelloSceneformActivity extends AppCompatActivity {
     private int oneTimeFlag = 0;
     private AnchorNode prevAnchorNode;
     private AnchorNode endNode;
+    private Node playerNode;
     private Node andy;
     private Node st,en,temp,temp2;
 
@@ -104,13 +105,13 @@ public class HelloSceneformActivity extends AppCompatActivity {
       for(int i=0;i<12;i++)
       modelRender(arg[i],i);
     ModelRenderable.builder()
-        .setSource(this, Uri.parse("spaceship.ufb"))
+        .setSource(this, Uri.parse("spaceship.sfb"))
         .build()
-        .thenAccept(renderable -> userRenderable = renderable)
+        .thenAccept(renderable -> playerRenderable = renderable)
         .exceptionally(
             throwable -> {
               Toast toast =
-                  Toast.makeText(this, "Unable to load userRenderable", Toast.LENGTH_LONG);
+                  Toast.makeText(this, "Unable to load playerRenderable", Toast.LENGTH_LONG);
               toast.setGravity(Gravity.CENTER, 0, 0);
               toast.show();
               return null;
@@ -186,6 +187,9 @@ public class HelloSceneformActivity extends AppCompatActivity {
                                       }
                               );
                       arFragment.getArSceneView().getSession().getConfig().setPlaneFindingMode(Config.PlaneFindingMode.DISABLED);
+                      playerNode = endNode;
+                      playerNode.setLocalScale(new Vector3(0.6f,0.6f,0.6f));
+                      playerNode.setRenderable(playerRenderable);
                       allPlanetsMove();
                   });
 

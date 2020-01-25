@@ -56,7 +56,7 @@
     file: 'sampledata/Space/spaceship.fbx',
     name: 'spaceship',
     recenter: 'root',
-    scale: 6.4057839999999997,
+    scale: 64.057839999999997,
   },
   samplers: [
     {
