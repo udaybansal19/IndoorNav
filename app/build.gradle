@@ -65,3 +65,8 @@ sceneform.asset('sampledata/model_obj_1TUCDmHZKQY_azFXD3-odOm/model.obj',
         'default',
         'sampledata/model_obj_1TUCDmHZKQY_azFXD3-odOm/model.sfa',
         'src/main/assets/model')
+
+sceneform.asset('sampledata/model_obj_1TUCDmHZKQY_azFXD3-odOm/uploads_files_1993562_fbx.fbx',
+        'default',
+        'sampledata/model_obj_1TUCDmHZKQY_azFXD3-odOm/uploads_files_1993562_fbx.sfa',
+        'src/main/assets/uploads_files_1993562_fbx')

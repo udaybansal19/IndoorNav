@@ -1,0 +1,67 @@
+{
+  animations: [
+    {
+      clips: [
+        {
+          name: 'Take 001',
+          runtime_name: 'uploads_files_1993562_fbx',
+        },
+      ],
+      path: 'sampledata/model_obj_1TUCDmHZKQY_azFXD3-odOm/uploads_files_1993562_fbx.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: 'lambert1',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            0,
+            0,
+            1,
+          ],
+        },
+        {
+          baseColorMap: null,
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 1,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 0.11,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/model_obj_1TUCDmHZKQY_azFXD3-odOm/uploads_files_1993562_fbx.fbx',
+    name: 'uploads_files_1993562_fbx',
+    recenter: 'root',
+  },
+  version: '0.54:2',
+}
