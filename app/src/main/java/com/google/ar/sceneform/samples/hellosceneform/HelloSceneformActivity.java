@@ -52,9 +52,10 @@ public class HelloSceneformActivity extends AppCompatActivity {
 
     private ArFragment arFragment;
     private ModelRenderable andyRenderable;
-    private  ModelRenderable highlight;
+    private  ModelRenderable arrowRenderable;
 
     int c=0;
+    int c1=0;
     private AnchorNode prevAnchorNode;
 
     @Override
@@ -76,7 +77,7 @@ public class HelloSceneformActivity extends AppCompatActivity {
         ModelRenderable.builder()
                 .setSource(this, R.raw.andy)
                 .build()
-                .thenAccept(renderable -> highlight = renderable)
+                .thenAccept(renderable -> andyRenderable = renderable)
                 .exceptionally(
                         throwable -> {
                             Toast toast =
@@ -85,16 +86,36 @@ public class HelloSceneformActivity extends AppCompatActivity {
                             toast.show();
                             return null;
                         });
+        ModelRenderable.builder()
+                .setSource(this, Uri.parse("model.sfb"))
+                .build()
+                .thenAccept(renderable -> arrowRenderable = renderable)
+                .exceptionally(
+                        throwable -> {
+                            Toast toast =
+                                    Toast.makeText(this, "Unable to load Arrow renderable", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                            return null;
+                        });
 
         arFragment.setOnTapArPlaneListener(
                 (HitResult hitResult, Plane plane, MotionEvent motionEvent) -> {
-                    if (highlight == null) {
+                    if (andyRenderable == null) {
                         return;
                     }
 
                     // Create the Anchor.
                     Anchor anchor = hitResult.createAnchor();
                     AnchorNode anchorNode = new AnchorNode(anchor);
+                    anchorNode.setParent(arFragment.getArSceneView().getScene());
+                    if(c1==0)
+                    {
+                        c1++;
+                        AnchorNode newNode = anchorNode;
+                        newNode.setLocalScale(new Vector3(0.1f,0.1f,0.1f));
+                        newNode.setRenderable(arrowRenderable);
+                    }
                     anchorNode.setParent(arFragment.getArSceneView().getScene());
 
                     if(c==1) {

@@ -59,3 +59,9 @@ sceneform.asset('sampledata/models/andy.obj',
         'default',
         'sampledata/models/andy.sfa',
         'src/main/res/raw/andy')
+
+
+sceneform.asset('sampledata/model_obj_1TUCDmHZKQY_azFXD3-odOm/model.obj',
+        'default',
+        'sampledata/model_obj_1TUCDmHZKQY_azFXD3-odOm/model.sfa',
+        'src/main/assets/model')
