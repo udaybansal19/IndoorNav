@@ -53,6 +53,8 @@ public class HelloSceneformActivity extends AppCompatActivity {
     private ArFragment arFragment;
     private ModelRenderable andyRenderable;
     private  ModelRenderable arrowRenderable;
+    private  ModelRenderable markerRenderable;
+    private Vector3 point1, point2;
 
     int c=0;
     int c1=0;
@@ -86,6 +88,7 @@ public class HelloSceneformActivity extends AppCompatActivity {
                             toast.show();
                             return null;
                         });
+
         ModelRenderable.builder()
                 .setSource(this, Uri.parse("model.sfb"))
                 .build()
@@ -98,10 +101,11 @@ public class HelloSceneformActivity extends AppCompatActivity {
                             toast.show();
                             return null;
                         });
+
         ModelRenderable.builder()
                 .setSource(this, Uri.parse("uploads_files_1993562_fbx.sfb"))
                 .build()
-                .thenAccept(renderable -> arrowRenderable = renderable)
+                .thenAccept(renderable -> markerRenderable = renderable)
                 .exceptionally(
                         throwable -> {
                             Toast toast =
@@ -121,43 +125,40 @@ public class HelloSceneformActivity extends AppCompatActivity {
                     Anchor anchor = hitResult.createAnchor();
                     AnchorNode anchorNode = new AnchorNode(anchor);
                     anchorNode.setParent(arFragment.getArSceneView().getScene());
-                    if(c1==0)
-                    {
-                        c1++;
-                        AnchorNode newNode = anchorNode;
-                        newNode.setLocalScale(new Vector3(0.1f,0.1f,0.1f));
-                        newNode.setRenderable(arrowRenderable);
-                    }
-                    anchorNode.setParent(arFragment.getArSceneView().getScene());
+
+
 
                     if(c==1) {
-                        Vector3 point1, point2;
-                        point1 = prevAnchorNode.getWorldPosition();
+                        AnchorNode anchorNode1 = new AnchorNode(anchor);
+                        anchorNode1.setParent(arFragment.getArSceneView().getScene());
+
                         point2 = anchorNode.getWorldPosition();
 
                         final Vector3 difference = Vector3.subtract(point1, point2);
                         final Vector3 directionFromTopToBottom = difference.normalized();
                         final Quaternion rotationFromAToB =
                                 Quaternion.lookRotation(directionFromTopToBottom, Vector3.up());
-                        MaterialFactory.makeTransparentWithColor(getApplicationContext(), new Color(0, 255, 244, (float)0.2))
+                        MaterialFactory.makeTransparentWithColor(getApplicationContext(), new Color(0, 137, 244, (float)0.2))
                                 .thenAccept(
                                         material -> {
                             /* Then, create a rectangular prism, using ShapeFactory.makeCube() and use the difference vector
                                    to extend to the necessary length.  */
                                             ModelRenderable model = ShapeFactory.makeCube(
-                                                    new Vector3( 0.50f, 0.01f, difference.length()),
+                                                    new Vector3( 0.3f, 0.01f, difference.length()),
                                                     Vector3.zero(), material);
                             /* Last, set the world rotation of the node to the rotation calculated earlier and set the world position to
                                    the midpoint between the given points . */
                                             Node node = new Node();
-                                            node.setParent(anchorNode);
+                                            node.setParent(anchorNode1);
                                             node.setRenderable(model);
                                             node.setWorldPosition(Vector3.add(point1, point2).scaled(.5f));
                                             node.setWorldRotation(rotationFromAToB);
-
-                                            Config config = null;
-                                            //Added by us.
-                                            config.setPlaneFindingMode(Config.PlaneFindingMode.DISABLED);
+                                            prevAnchorNode.setLocalScale(new Vector3(0.1f,0.1f,0.1f));
+                                            prevAnchorNode.setWorldRotation(rotationFromAToB);
+                                            prevAnchorNode.setRenderable(arrowRenderable);
+                                           anchorNode.setLocalScale(new Vector3(0.4f,0.4f,0.4f));
+                                           anchorNode.setLocalPosition(new Vector3(0f,0f,0.5f));
+                                            anchorNode.setRenderable(markerRenderable);
                                         }
                                 );
 
@@ -172,9 +173,17 @@ public class HelloSceneformActivity extends AppCompatActivity {
 //              node.select();
                     }else{
                         c=1;
-
+                        point1 = anchorNode.getWorldPosition();
+                        Anchor prevAnchor = hitResult.createAnchor();
+                        prevAnchorNode = new AnchorNode(prevAnchor);
+                        prevAnchorNode.setParent(arFragment.getArSceneView().getScene());
                     }
-                    prevAnchorNode = anchorNode;
+//                    if(c1==0)
+//                    {
+//                        c1++;
+//                        anchorNode.setLocalScale(new Vector3(0.1f,0.1f,0.1f));
+//                        anchorNode.setRenderable(arrowRenderable);
+//                    }
                 });
     }
 
