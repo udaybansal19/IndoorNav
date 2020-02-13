@@ -28,7 +28,6 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.widget.Toast;
 import com.google.ar.core.Anchor;
-import com.google.ar.core.Config;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
 import com.google.ar.sceneform.AnchorNode;
@@ -40,14 +39,12 @@ import com.google.ar.sceneform.rendering.MaterialFactory;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.ShapeFactory;
 import com.google.ar.sceneform.ux.ArFragment;
-import com.google.ar.core.Config;
-import com.google.ar.sceneform.ux.TransformableNode;
 
 /**
  * This is an example activity that uses the Sceneform UX package to make common AR tasks easier.
  */
-public class HelloSceneformActivity extends AppCompatActivity {
-    private static final String TAG = HelloSceneformActivity.class.getSimpleName();
+public class IndoorNavMainActivity extends AppCompatActivity {
+    private static final String TAG = IndoorNavMainActivity.class.getSimpleName();
     private static final double MIN_OPENGL_VERSION = 3.0;
 
     private ArFragment arFragment;
