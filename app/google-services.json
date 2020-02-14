@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "386921234965",
+    "firebase_url": "https://ar-cloud-anchor-513e3.firebaseio.com",
+    "project_id": "ar-cloud-anchor-513e3",
+    "storage_bucket": "ar-cloud-anchor-513e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386921234965:android:acc28a9b4b257b3437c41c",
+        "android_client_info": {
+          "package_name": "com.example.IndoorNav"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386921234965-rncdgbvp03f4sf8eceu4fb93qeqb5hqe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaWktsomj0akzbwLqxAxEFoN-LIyKTDkY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386921234965-rncdgbvp03f4sf8eceu4fb93qeqb5hqe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386921234965:android:ccbd1db1ccd91ef437c41c",
+        "android_client_info": {
+          "package_name": "com.google.ar.core.examples.java.cloudanchor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386921234965-rncdgbvp03f4sf8eceu4fb93qeqb5hqe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaWktsomj0akzbwLqxAxEFoN-LIyKTDkY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386921234965-rncdgbvp03f4sf8eceu4fb93qeqb5hqe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

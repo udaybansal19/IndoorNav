@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.ar.sceneform.samples.hellosceneform;
+package com.example.indoorNav;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -38,6 +38,7 @@ import com.google.ar.sceneform.rendering.Color;
 import com.google.ar.sceneform.rendering.MaterialFactory;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.ShapeFactory;
+import com.google.example.indoorNav.R;
 import com.google.ar.sceneform.ux.ArFragment;
 
 /**
