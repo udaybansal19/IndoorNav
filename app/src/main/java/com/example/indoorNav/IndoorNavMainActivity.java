@@ -168,15 +168,6 @@ public class IndoorNavMainActivity extends AppCompatActivity {
                                         }
                                 );
 
-
-
-//              // Create the transformable andy and add it to the anchor.
-//              TransformableNode node = new TransformableNode(arFragment.getTransformationSystem());
-//              node.getScaleController().setMaxScale(1000f);
-//              node.getScaleController().setMinScale(50f);
-//              node.setParent(anchorNode);
-//              node.setRenderable(highlight);
-//              node.select();
                     }else{
                         c=1;
                         point1 = anchorNode.getWorldPosition();
@@ -184,12 +175,6 @@ public class IndoorNavMainActivity extends AppCompatActivity {
                         prevAnchorNode = new AnchorNode(prevAnchor);
                         prevAnchorNode.setParent(arFragment.getArSceneView().getScene());
                     }
-//                    if(c1==0)
-//                    {
-//                        c1++;
-//                        anchorNode.setLocalScale(new Vector3(0.1f,0.1f,0.1f));
-//                        anchorNode.setRenderable(arrowRenderable);
-//                    }
                 });
     }
 
