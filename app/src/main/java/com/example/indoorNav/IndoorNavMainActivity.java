@@ -75,7 +75,7 @@ public class IndoorNavMainActivity extends AppCompatActivity {
         arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
 
 
-       
+
 
 
 
