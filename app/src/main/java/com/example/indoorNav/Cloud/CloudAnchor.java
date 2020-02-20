@@ -9,8 +9,11 @@ import com.google.ar.core.Session;
 import com.google.ar.sceneform.SceneView;
 
 public class CloudAnchor {
-    public CloudAnchor() {
 
+    public Session session;
+
+    public CloudAnchor(Session session) {
+        this.session = session;
     }
 
 

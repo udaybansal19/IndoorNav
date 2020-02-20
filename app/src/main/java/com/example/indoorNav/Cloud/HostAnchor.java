@@ -6,7 +6,7 @@ import com.google.ar.core.Session;
 
 public class HostAnchor extends CloudAnchor {
 
-    public void host(Session session, MapNode mapNode) {
+    public void host(MapNode mapNode) {
 
         session.hostCloudAnchor(mapNode.anchorNode.getAnchor());
 
