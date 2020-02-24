@@ -6,7 +6,7 @@ import com.google.ar.sceneform.AnchorNode;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class MapNode {
+public class MapNode extends AnchorNode {
     public AnchorNode anchorNode;
     public String mapNodeId;
     //TODO: Check if a priority queue would be better for storing edge weights.

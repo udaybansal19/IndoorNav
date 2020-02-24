@@ -55,9 +55,6 @@ public class IndoorNavMainActivity extends AppCompatActivity {
     private  ModelRenderable arrowRenderable;
     private  ModelRenderable markerRenderable;
     private Vector3 point1, point2;
-
-    int c=0;
-    int c1=0;
     private AnchorNode prevAnchorNode;
 
     @Override
@@ -75,48 +72,18 @@ public class IndoorNavMainActivity extends AppCompatActivity {
         arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
 
 
-
-
-        // When you build a Renderable, Sceneform loads its resources in the background while returning
-        // a CompletableFuture. Call thenAccept(), handle(), or check isDone() before calling get().
-        ModelRenderable.builder()
-                .setSource(this, R.raw.andy)
-                .build()
-                .thenAccept(renderable -> andyRenderable = renderable)
-                .exceptionally(
-                        throwable -> {
-                            Toast toast =
-                                    Toast.makeText(this, "Unable to load highlight renderable", Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-                            return null;
-                        });
-
-        ModelRenderable.builder()
-                .setSource(this, Uri.parse("model.sfb"))
-                .build()
-                .thenAccept(renderable -> arrowRenderable = renderable)
-                .exceptionally(
-                        throwable -> {
-                            Toast toast =
-                                    Toast.makeText(this, "Unable to load Arrow renderable", Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-                            return null;
-                        });
-
-        ModelRenderable.builder()
-                .setSource(this, Uri.parse("uploads_files_1993562_fbx.sfb"))
-                .build()
-                .thenAccept(renderable -> markerRenderable = renderable)
-                .exceptionally(
-                        throwable -> {
-                            Toast toast =
-                                    Toast.makeText(this, "Unable to load Location marker renderable", Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-                            return null;
-                        });
+//        ModelRenderable.builder()
+//                .setSource(this, Uri.parse("model.sfb"))
+//                .build()
+//                .thenAccept(renderable -> arrowRenderable = renderable)
+//                .exceptionally(
+//                        throwable -> {
+//                            Toast toast =
+//                                    Toast.makeText(this, "Unable to load Arrow renderable", Toast.LENGTH_LONG);
+//                            toast.setGravity(Gravity.CENTER, 0, 0);
+//                            toast.show();
+//                            return null;
+//                        });
 
         arFragment.setOnTapArPlaneListener(
                 (HitResult hitResult, Plane plane, MotionEvent motionEvent) -> {
@@ -128,51 +95,37 @@ public class IndoorNavMainActivity extends AppCompatActivity {
                     Anchor anchor = hitResult.createAnchor();
                     AnchorNode anchorNode = new AnchorNode(anchor);
                     anchorNode.setParent(arFragment.getArSceneView().getScene());
+                });
+    }
 
-
-
-                    if(c==1) {
-                        AnchorNode anchorNode1 = new AnchorNode(anchor);
-                        anchorNode1.setParent(arFragment.getArSceneView().getScene());
-
-                        point2 = anchorNode.getWorldPosition();
-
-                        final Vector3 difference = Vector3.subtract(point1, point2);
-                        final Vector3 directionFromTopToBottom = difference.normalized();
-                        final Quaternion rotationFromAToB =
-                                Quaternion.lookRotation(directionFromTopToBottom, Vector3.up());
-                        MaterialFactory.makeTransparentWithColor(getApplicationContext(), new Color(0, 137, 244, (float)0.2))
-                                .thenAccept(
-                                        material -> {
+    private void highlight (AnchorNode anchorNode,AnchorNode anchorNode1) {
+        final Vector3 difference = Vector3.subtract(point1, point2);
+        final Vector3 directionFromTopToBottom = difference.normalized();
+        final Quaternion rotationFromAToB =
+                Quaternion.lookRotation(directionFromTopToBottom, Vector3.up());
+        MaterialFactory.makeTransparentWithColor(getApplicationContext(), new Color(0, 137, 244, (float) 0.2))
+                .thenAccept(
+                        material -> {
                             /* Then, create a rectangular prism, using ShapeFactory.makeCube() and use the difference vector
                                    to extend to the necessary length.  */
-                                            ModelRenderable model = ShapeFactory.makeCube(
-                                                    new Vector3( 0.3f, 0.01f, difference.length()),
-                                                    Vector3.zero(), material);
+                            ModelRenderable model = ShapeFactory.makeCube(
+                                    new Vector3(0.3f, 0.01f, difference.length()),
+                                    Vector3.zero(), material);
                             /* Last, set the world rotation of the node to the rotation calculated earlier and set the world position to
                                    the midpoint between the given points . */
-                                            Node node = new Node();
-                                            node.setParent(anchorNode1);
-                                            node.setRenderable(model);
-                                            node.setWorldPosition(Vector3.add(point1, point2).scaled(.5f));
-                                            node.setWorldRotation(rotationFromAToB);
-                                            prevAnchorNode.setLocalScale(new Vector3(0.1f,0.1f,0.1f));
-                                            prevAnchorNode.setWorldRotation(rotationFromAToB);
-                                            prevAnchorNode.setRenderable(arrowRenderable);
-                                           anchorNode.setLocalScale(new Vector3(0.4f,0.4f,0.4f));
-                                           anchorNode.setLocalPosition(new Vector3(0f,0f,0.5f));
-                                            anchorNode.setRenderable(markerRenderable);
-                                        }
-                                );
+                            Node node = new Node();
+                            node.setParent(anchorNode1);
+                            node.setRenderable(model);
+                            node.setWorldPosition(Vector3.add(point1, point2).scaled(.5f));
+                            node.setWorldRotation(rotationFromAToB);
+                            prevAnchorNode.setLocalScale(new Vector3(0.1f, 0.1f, 0.1f));
+                            prevAnchorNode.setWorldRotation(rotationFromAToB);
+                            prevAnchorNode.setRenderable(arrowRenderable);
+                            anchorNode.setLocalScale(new Vector3(0.4f, 0.4f, 0.4f));
+                            anchorNode.setLocalPosition(new Vector3(0f, 0f, 0.5f));
+                            anchorNode.setRenderable(markerRenderable);
+                        });
 
-                    }else{
-                        c=1;
-                        point1 = anchorNode.getWorldPosition();
-                        Anchor prevAnchor = hitResult.createAnchor();
-                        prevAnchorNode = new AnchorNode(prevAnchor);
-                        prevAnchorNode.setParent(arFragment.getArSceneView().getScene());
-                    }
-                });
     }
 
     /**

@@ -2,13 +2,20 @@ package com.example.indoorNav.MapNodes;
 
 import java.util.ArrayList;
 
-public class pathQueue extends PathNodes{
+public class pathQueue extends PathNodes {
 
-    ArrayList pathQueue = new ArrayList();
+    private String pathName;
+    private ArrayList pathQueue = new ArrayList();
 
-    public MapNode hostNode(MapNode mapNode) {
-
-
+    public void addNode(MapNode mapNode) {
+        pathQueue.add(mapNode);
     }
 
+    public String getPathName() {
+        return pathName;
+    }
+
+    public void setPathName(String pathName) {
+        this.pathName = pathName;
+    }
 }
