@@ -1,5 +1,7 @@
 package com.example.indoorNav.MapNodes;
 
+import android.util.Pair;
+
 import com.google.ar.core.Pose;
 import com.google.ar.sceneform.AnchorNode;
 
@@ -9,8 +11,8 @@ import java.util.Collections;
 public class MapNode extends AnchorNode {
     public AnchorNode anchorNode;
     public String mapNodeId;
-    //TODO: Check if a priority queue would be better for storing edge weights.
-    public ArrayList<MapNode> adjacentAnchors;
+    public ArrayList<Pair<Double,MapNode>> adjacentAnchors;
+    public int accessLevel = 1;
     public MapNode() {
         anchorNode = new AnchorNode();
         mapNodeId = new String();
@@ -21,6 +23,19 @@ public class MapNode extends AnchorNode {
         anchorNode.setParent(parentNode);
     }
 
+    public void addAdjacentAnchor (MapNode mapNode) {
+
+        Double weight = getEdgeWeight(mapNode);
+
+        Pair<Double,MapNode> p = new Pair<Double, MapNode>(weight, mapNode);
+
+        adjacentAnchors.add(p);
+
+    }
+
+
+    //TODO: Ensure edge weight returned is the distance along the plane only
+    // i.e. straight distance between the nodes placed on the floor.
     public double getEdgeWeight (MapNode mapNode) {
         Pose startPose = anchorNode.getAnchor().getPose();
         Pose endPose = mapNode.anchorNode.getAnchor().getPose();
