@@ -57,6 +57,10 @@ public class IndoorNavMainActivity extends AppCompatActivity {
     private Vector3 point1, point2;
     private AnchorNode prevAnchorNode;
 
+    public ArFragment getArFragment() {
+        return arFragment;
+    }
+
     @Override
     @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
     // CompletableFuture requires api level 24
@@ -70,6 +74,8 @@ public class IndoorNavMainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_ux);
         arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
+
+
 
 
 //        ModelRenderable.builder()
@@ -98,35 +104,7 @@ public class IndoorNavMainActivity extends AppCompatActivity {
                 });
     }
 
-    private void highlight (AnchorNode anchorNode,AnchorNode anchorNode1) {
-        final Vector3 difference = Vector3.subtract(point1, point2);
-        final Vector3 directionFromTopToBottom = difference.normalized();
-        final Quaternion rotationFromAToB =
-                Quaternion.lookRotation(directionFromTopToBottom, Vector3.up());
-        MaterialFactory.makeTransparentWithColor(getApplicationContext(), new Color(0, 137, 244, (float) 0.2))
-                .thenAccept(
-                        material -> {
-                            /* Then, create a rectangular prism, using ShapeFactory.makeCube() and use the difference vector
-                                   to extend to the necessary length.  */
-                            ModelRenderable model = ShapeFactory.makeCube(
-                                    new Vector3(0.3f, 0.01f, difference.length()),
-                                    Vector3.zero(), material);
-                            /* Last, set the world rotation of the node to the rotation calculated earlier and set the world position to
-                                   the midpoint between the given points . */
-                            Node node = new Node();
-                            node.setParent(anchorNode1);
-                            node.setRenderable(model);
-                            node.setWorldPosition(Vector3.add(point1, point2).scaled(.5f));
-                            node.setWorldRotation(rotationFromAToB);
-                            prevAnchorNode.setLocalScale(new Vector3(0.1f, 0.1f, 0.1f));
-                            prevAnchorNode.setWorldRotation(rotationFromAToB);
-                            prevAnchorNode.setRenderable(arrowRenderable);
-                            anchorNode.setLocalScale(new Vector3(0.4f, 0.4f, 0.4f));
-                            anchorNode.setLocalPosition(new Vector3(0f, 0f, 0.5f));
-                            anchorNode.setRenderable(markerRenderable);
-                        });
 
-    }
 
     /**
      * Returns false and displays an error message if Sceneform can not run, true if Sceneform can run

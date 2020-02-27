@@ -13,6 +13,8 @@ public class MapNode extends AnchorNode {
     public String mapNodeId;
     public ArrayList<Pair<Double,MapNode>> adjacentAnchors;
     public int accessLevel = 1;
+
+
     public MapNode() {
         anchorNode = new AnchorNode();
         mapNodeId = new String();
