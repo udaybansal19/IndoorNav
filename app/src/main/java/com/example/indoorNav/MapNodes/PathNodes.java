@@ -9,7 +9,7 @@ public class PathNodes extends MapNode {
     public PathNodes(AnchorNode anchorNode) {
 
         this.anchorNode = anchorNode;
-
+        hostNode(this);
     }
 
     public void hostNode(MapNode mapNode) {

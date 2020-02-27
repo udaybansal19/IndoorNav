@@ -2,6 +2,7 @@ package com.example.indoorNav;
 
 import android.view.MotionEvent;
 
+import com.example.indoorNav.MapNodes.DestinationNodes;
 import com.example.indoorNav.MapNodes.GlobalNode;
 import com.example.indoorNav.MapNodes.MapNode;
 import com.example.indoorNav.MapNodes.PathNodes;
@@ -21,15 +22,18 @@ import com.google.example.indoorNav.R;
 public class FirstScan extends IndoorNavMainActivity {
 
     GlobalNode globalNode = new GlobalNode();
+    MapNode prevNode = new MapNode(globalNode.anchorNode);
+
 
    public void makePathNode(AnchorNode anchorNode) {
 
-       PathNodes pathNodes = new PathNodes();
+       PathNodes pathNodes = new PathNodes(anchorNode);
+       makeWay(prevNode, anchorNode);
+       prevNode = new MapNode(anchorNode);
+   }
 
-       pathNodes.
-
-
-
+   public void addDestination(AnchorNode anchorNode, String name) {
+       DestinationNodes dest = new DestinationNodes(anchorNode, name);
    }
 
 
@@ -37,7 +41,7 @@ public class FirstScan extends IndoorNavMainActivity {
 
 
 
-    private void highlight (AnchorNode anchorNode, AnchorNode first , AnchorNode last) {
+    private void makeWay (AnchorNode first , AnchorNode last) {
 
         final Vector3 difference = Vector3.subtract(first.getWorldPosition(), last.getWorldPosition());
         final Vector3 directionFromTopToBottom = difference.normalized();
@@ -54,7 +58,7 @@ public class FirstScan extends IndoorNavMainActivity {
                             /* Last, set the world rotation of the node to the rotation calculated earlier and set the world position to
                                    the midpoint between the given points . */
                             Node node = new Node();
-                            node.setParent(anchorNode);
+                            node.setParent(globalNode);
                             node.setRenderable(model);
                             node.setWorldPosition(Vector3.add(first.getWorldPosition(),last.getWorldPosition()).scaled(.5f));
                             node.setWorldRotation(rotationFromAToB);

@@ -21,6 +21,12 @@ public class MapNode extends AnchorNode {
         adjacentAnchors = new ArrayList<>();
     }
 
+    public MapNode(AnchorNode anchorNode) {
+        this.anchorNode = anchorNode;
+        mapNodeId = new String();
+        adjacentAnchors = new ArrayList<>();
+    }
+
     public void setParent (AnchorNode parentNode) {
         anchorNode.setParent(parentNode);
     }
